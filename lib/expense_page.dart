@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widgets/expense_input.dart';
 import 'package:expense_tracker/widgets/expense_list.dart';
 import 'package:flutter/material.dart';
 import 'models/expense.dart';
@@ -32,7 +33,9 @@ class _ExpensePage extends State<ExpensePage> {
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
         context: context,
-        builder: (ctx) => Text("Showing the modal bottom sheet"));
+        builder: (BuildContext context) {
+          return ExpenseInput();
+        });
   }
 
   @override
