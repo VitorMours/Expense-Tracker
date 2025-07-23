@@ -4,7 +4,7 @@ import "package:uuid/v4.dart";
 import "package:intl/intl.dart";
 
 // ignore: constant_identifier_names
-final DateFormatter = DateFormat.yMd();
+DateFormat DateFormatter = DateFormat.yMd();
 
 const uuid = Uuid();
 

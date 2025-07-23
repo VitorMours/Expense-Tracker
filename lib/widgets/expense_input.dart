@@ -1,3 +1,4 @@
+import "package:expense_tracker/models/expense.dart";
 import "package:flutter/material.dart";
 
 class ExpenseInput extends StatefulWidget {
@@ -8,6 +9,8 @@ class ExpenseInput extends StatefulWidget {
 class _ExpenseInputState extends State<ExpenseInput> {
   TextEditingController nameController = TextEditingController();
   TextEditingController amountController = TextEditingController();
+  DateTime? datePicked;
+  Category? _dropdownValue;
 
   @override
   void dispose() {
@@ -16,11 +19,15 @@ class _ExpenseInputState extends State<ExpenseInput> {
     amountController.dispose();
   }
 
-  void _getDatePicker() {
+  Future<void> _getDatePicker() async {
     final now = DateTime.now();
     final last = DateTime(now.year + 1, now.month, now.day);
-    showDatePicker(
+    datePicked = await showDatePicker(
         context: context, initialDate: now, firstDate: now, lastDate: last);
+
+    setState(() {
+      datePicked = datePicked;
+    });
   }
 
   void _createExpense() {}
@@ -51,17 +58,40 @@ class _ExpenseInputState extends State<ExpenseInput> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text("Escolha uma data"),
+                    Text(datePicked == null
+                        ? "Escolha uma data"
+                        : DateFormatter.format(datePicked!)),
                     IconButton(
                         tooltip: "Escolha a data da despesa",
                         onPressed: _getDatePicker,
                         icon: const Icon(Icons.calendar_month)),
                   ],
                 ),
-                ElevatedButton(
-                    onPressed: _createExpense, child: const Text("Criar Gasto"))
+                DropdownButton(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    value: _dropdownValue,
+                    items: Category.values
+                        .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category.name.toUpperCase())))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        if (value == null) {
+                          return;
+                        }
+                        _dropdownValue = value;
+                      });
+                    }),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                  onPressed: _createExpense, child: const Text("Criar Gasto")),
+            ],
           )
         ]));
   }
