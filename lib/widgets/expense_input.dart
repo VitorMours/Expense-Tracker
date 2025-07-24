@@ -30,7 +30,36 @@ class _ExpenseInputState extends State<ExpenseInput> {
     });
   }
 
-  void _createExpense() {}
+  void _createExpense() {
+    if (nameController.text.isEmpty ||
+        amountController.text.isEmpty ||
+        datePicked == null ||
+        _dropdownValue == null) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text(
+                    "Tiveram valores que foram preenchidos incorretamente"),
+                content: const Text(
+                    "Por favor, corrija os valores e preencha eles de maneira correta para poder registrar o gasto de maneira correta igualmente."),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
+      return;
+    }
+    print(
+        "${nameController.text} ${amountController.text} ${datePicked} ${_dropdownValue}");
+    nameController.clear();
+    amountController.clear();
+    datePicked = null;
+    _dropdownValue = null;
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
