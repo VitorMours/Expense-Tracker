@@ -1,7 +1,12 @@
 import "package:expense_tracker/models/expense.dart";
 import "package:flutter/material.dart";
+import "../expense_page.dart";
 
 class ExpenseInput extends StatefulWidget {
+  const ExpenseInput({super.key, required this.onCreateExpense});
+
+  final Function(Expense) onCreateExpense;
+
   @override
   State createState() => _ExpenseInputState();
 }
@@ -19,9 +24,25 @@ class _ExpenseInputState extends State<ExpenseInput> {
     amountController.dispose();
   }
 
+  void addCreatedExpense() {
+    Expense newExpense = Expense(
+      name: nameController.text,
+      amount: double.tryParse(amountController.text) ?? 0.0,
+      date: datePicked!,
+      category: _dropdownValue!,
+    );
+    widget.onCreateExpense(newExpense);
+    nameController.clear();
+    amountController.clear();
+    datePicked = null;
+    _dropdownValue = null;
+    Navigator.of(context).pop();
+  }
+
   Future<void> _getDatePicker() async {
     final now = DateTime.now();
     final last = DateTime(now.year + 1, now.month, now.day);
+
     datePicked = await showDatePicker(
         context: context, initialDate: now, firstDate: now, lastDate: last);
 
@@ -52,13 +73,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
               ));
       return;
     }
-    print(
-        "${nameController.text} ${amountController.text} ${datePicked} ${_dropdownValue}");
-    nameController.clear();
-    amountController.clear();
-    datePicked = null;
-    _dropdownValue = null;
-    Navigator.of(context).pop();
+    addCreatedExpense();
   }
 
   @override

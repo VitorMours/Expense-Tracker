@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'models/expense.dart';
 
 class ExpensePage extends StatefulWidget {
+  const ExpensePage({super.key});
+
   @override
   State createState() => _ExpensePage();
 }
 
 class _ExpensePage extends State<ExpensePage> {
-  final List<Expense> expensesList = [
+  List<Expense> expensesList = [
     Expense(
       name: "Ferias",
       amount: 12,
@@ -30,11 +32,17 @@ class _ExpensePage extends State<ExpensePage> {
     ),
   ];
 
+  void addExpense(Expense expense) {
+    setState(() {
+      expensesList.add(expense);
+    });
+  }
+
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return ExpenseInput();
+          return ExpenseInput(onCreateExpense: addExpense);
         });
   }
 
