@@ -28,5 +28,6 @@ This project is perfect for beginners looking to learn how to handle lists, dele
 
 ## HomePage and Aesthetics of the App
 
-
-![app home page](img.png)
+<p align="center">
+  <img src="img.png" alt="app home page" width="400"/>
+</p>
