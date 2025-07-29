@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
           colorScheme: ColorScheme.fromSeed(
-            background: const Color.fromARGB(255, 18, 18, 18),
+            surface: const Color.fromARGB(255, 18, 18, 18),
             seedColor: Colors.deepPurple,
             primary: Colors.deepPurple,
-            secondary: const Color.fromARGB(255, 138, 115, 177),
+            secondary: Colors.deepPurpleAccent,
           ),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.deepPurple,
@@ -42,11 +42,17 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.deepPurple,
             primary: Colors.deepPurple,
-            secondary: Colors.amber,
+            secondary: Colors.deepPurpleAccent.shade100,
           ),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.deepPurple,
             foregroundColor: Colors.white,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.deepPurple,
+            ),
           ),
         ),
         debugShowCheckedModeBanner: false,

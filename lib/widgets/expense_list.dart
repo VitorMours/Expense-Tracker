@@ -5,37 +5,20 @@ import "expense_card.dart";
 
 class ExpenseList extends StatefulWidget {
   List<Expense> expenses;
+  Function deleteExpenseFunction;
 
-  ExpenseList({super.key, required this.expenses});
+  ExpenseList({super.key, required this.expenses, required this.deleteExpenseFunction});
 
   @override
   State createState() => _ExpenseListState();
 }
 
 class _ExpenseListState extends State<ExpenseList> {
-  void undoDeleteExpense(Expense expense) {
-    setState(() {
-      widget.expenses.add(expense);
-    });
-  }
 
-  void onDeleteExpense(Expense expense, int index) {
-    widget.expenses.remove(widget.expenses[index]);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: const Duration(seconds: 3),
-      content: const Text("Expense deleted"),
-      action: SnackBarAction(
-        label: "Undo",
-        onPressed: () {
-          undoDeleteExpense(expense);
-        },
-      ),
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400, // Set an appropriate height
       child: ListView.builder(
         itemCount: widget.expenses.length,
@@ -48,7 +31,7 @@ class _ExpenseListState extends State<ExpenseList> {
           ),
           key: ValueKey(widget.expenses[index]),
           onDismissed: (direction) {
-            onDeleteExpense(widget.expenses[index], index);
+            widget.deleteExpenseFunction(widget.expenses[index], index);
           },
           child: ExpenseCard(expense: widget.expenses[index]),
         ),

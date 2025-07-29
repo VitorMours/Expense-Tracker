@@ -79,7 +79,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(children: [
           TextField(
             controller: nameController,
@@ -93,7 +93,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
                   prefixText: "\$ ", label: Text("Expense Amount")),
               keyboardType: TextInputType.number),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 12),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +110,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
                             color: Theme.of(context).colorScheme.primary)),
                     IconButton(
                         style: ButtonStyle(
-                            iconColor: MaterialStateProperty.all<Color?>(
+                            iconColor: WidgetStateProperty.all<Color?>(
                                 Theme.of(context).colorScheme.primary)),
                         tooltip: "Escolha a data da despesa",
                         onPressed: _getDatePicker,
@@ -118,7 +118,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
                   ],
                 ),
                 DropdownButton(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     value: _dropdownValue,
                     items: Category.values
                         .map((category) => DropdownMenuItem(
@@ -141,7 +141,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
             children: [
               ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
+                      backgroundColor: WidgetStateProperty.all<Color>(
                           Theme.of(context).colorScheme.primary)),
                   onPressed: _createExpense,
                   child: const Text("Criar Gasto")),
