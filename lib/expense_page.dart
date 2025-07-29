@@ -40,6 +40,7 @@ class _ExpensePage extends State<ExpensePage> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+        backgroundColor: Theme.of(context).colorScheme.background,
         context: context,
         builder: (BuildContext context) {
           return ExpenseInput(onCreateExpense: addExpense);

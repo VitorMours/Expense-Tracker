@@ -10,7 +10,11 @@ class ExpenseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: Theme.of(context).colorScheme.secondary,
         elevation: 0.9,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Padding(
             padding: EdgeInsets.all(8),
             child: SizedBox(
@@ -22,7 +26,7 @@ class ExpenseCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(expense.name,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
                     const Spacer(),

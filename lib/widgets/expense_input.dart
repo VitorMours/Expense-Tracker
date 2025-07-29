@@ -79,7 +79,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(children: [
           TextField(
             controller: nameController,
@@ -93,7 +93,7 @@ class _ExpenseInputState extends State<ExpenseInput> {
                   prefixText: "\$ ", label: Text("Expense Amount")),
               keyboardType: TextInputType.number),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: EdgeInsets.symmetric(vertical: 12),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,10 +102,16 @@ class _ExpenseInputState extends State<ExpenseInput> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(datePicked == null
-                        ? "Escolha uma data"
-                        : DateFormatter.format(datePicked!)),
+                    Text(
+                        datePicked == null
+                            ? "Escolha uma data"
+                            : DateFormatter.format(datePicked!),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary)),
                     IconButton(
+                        style: ButtonStyle(
+                            iconColor: MaterialStateProperty.all<Color?>(
+                                Theme.of(context).colorScheme.primary)),
                         tooltip: "Escolha a data da despesa",
                         onPressed: _getDatePicker,
                         icon: const Icon(Icons.calendar_month)),
@@ -134,7 +140,11 @@ class _ExpenseInputState extends State<ExpenseInput> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                  onPressed: _createExpense, child: const Text("Criar Gasto")),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).colorScheme.primary)),
+                  onPressed: _createExpense,
+                  child: const Text("Criar Gasto")),
             ],
           )
         ]));
