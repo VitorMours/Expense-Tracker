@@ -25,3 +25,8 @@ Este projeto é ideal para quem está começando no Flutter e deseja entender co
 In addition to the native widgets, the project integrates the external library [`fl_chart`](https://pub.dev/packages/fl_chart), which enables a **clean and intuitive graphical representation** of user expenses. This feature allows users to easily visualize **which categories account for their highest expenses**.
 
 This project is perfect for beginners looking to learn how to handle lists, delete items, structure layouts with AppBar, and add basic chart visualizations to a Flutter app.
+
+## HomePage and Aesthetics of the App
+
+
+![app home page](img.png)
